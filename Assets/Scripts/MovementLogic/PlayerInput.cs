@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace DesignPatterns.StatePattern
     /// </summary>
     public class PlayerInput : MonoBehaviour
     {
+        public event Action switchToRightEvent;
+        public event Action switchToLeftEvent;
+        public event Action resetAllBlocksEvent;
         // Uses old Input class
         [Header("Controls")]
         [SerializeField] private KeyCode forward = KeyCode.W;
@@ -16,6 +20,9 @@ namespace DesignPatterns.StatePattern
         [SerializeField] private KeyCode left = KeyCode.A;
         [SerializeField] private KeyCode right = KeyCode.D;
         [SerializeField] private KeyCode jump = KeyCode.Space;
+        [SerializeField] private KeyCode switchToRight = KeyCode.E;
+        [SerializeField] private KeyCode switchToLeft = KeyCode.Q;
+        [SerializeField] private KeyCode resetAllBlocks = KeyCode.R;
 
         public Vector3 InputVector => inputVector;
         public bool IsJumping { get => isJumping; set => isJumping = value; }
@@ -51,6 +58,19 @@ namespace DesignPatterns.StatePattern
             if (Input.GetKey(right))
             {
                 xInput++;
+            }
+            if (Input.GetKeyDown(switchToRight))
+            {
+                switchToRightEvent?.Invoke();
+            }
+            if (Input.GetKeyDown(switchToLeft))
+            {
+                switchToLeftEvent?.Invoke();
+            }
+            if (Input.GetKeyDown(resetAllBlocks))
+            {
+                resetAllBlocksEvent?.Invoke();
+                Debug.Log("cos");
             }
 
             inputVector = new Vector3(xInput, yInput, zInput);

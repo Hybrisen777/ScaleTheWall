@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
@@ -40,11 +41,26 @@ namespace DesignPatterns.StatePattern
         private float targetSpeed;
         private float verticalVelocity;
         private float jumpCooldown;
+        [SerializeField]
+        private float turnSmoothTime = 0.1f;
+        [SerializeField]
+        private float turnSmoothTimeCharacter = 0.1f;
+        float turnSmoothVelocity;
+        float turnSmootVelocityCharacter;
+        public Transform cam;
+        [SerializeField]
+        private float currentAngle = 0;
+
+        [SerializeField]
+        private GameObject playerModel;
 
         private void Awake()
         {
             playerInput = GetComponent<PlayerInput>();
             charController = GetComponent<CharacterController>();
+
+            playerInput.switchToRightEvent += OnSwitchToRight;
+            playerInput.switchToLeftEvent += OnSwitchToLeft;
 
             // initialize state machine
             playerStateMachine = new SimplePlayerStateMachine(this);
@@ -92,8 +108,16 @@ namespace DesignPatterns.StatePattern
             {
                 targetSpeed = moveSpeed;
             }
+            float characterAngle = Mathf.Atan2(inputVector.x, inputVector.z) * Mathf.Rad2Deg;
+            float characterSmoothAngle = Mathf.SmoothDampAngle(playerModel.transform.eulerAngles.y, characterAngle + currentAngle, ref turnSmootVelocityCharacter, turnSmoothTimeCharacter);
+            playerModel.transform.rotation = Quaternion.Euler(0f, characterSmoothAngle, 0f);
+
+
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, currentAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
             // Move the player
-            charController.Move((inputVector.normalized * targetSpeed * Time.deltaTime) + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+            charController.Move(((Quaternion.AngleAxis(currentAngle, Vector3.up) * inputVector).normalized * targetSpeed * Time.deltaTime) + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
 
         }
 
@@ -140,5 +164,16 @@ namespace DesignPatterns.StatePattern
             // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y + groundedOffset, transform.position.z), groundedRadius);
         }
+
+        private void OnSwitchToLeft()
+        {
+            currentAngle -= 90;
+        }
+
+        private void OnSwitchToRight()
+        {
+            currentAngle += 90;
+        }
+
     }
 }

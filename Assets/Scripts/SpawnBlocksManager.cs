@@ -1,3 +1,4 @@
+using DesignPatterns.StatePattern;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,18 +22,20 @@ public class SpawnBlocksManager : MonoBehaviour
     [SerializeField]
     private int blockLimit = 5;
     [SerializeField]
-    private int blockCount = 0;
+    private int existingBlocksCount = 0;
     [SerializeField]
     private GameManager gameManagerSubjectToObserve;
+    [SerializeField]
+    private PlayerInput playerInput;
     [SerializeField]
     private bool isGameOn = false;
 
     public int BlockCount
     {
-        get { return blockCount; }
+        get { return existingBlocksCount; }
         set 
         { 
-            blockCount = value;
+            existingBlocksCount = value;
             blockCountChanged?.Invoke();
         }
     }
@@ -46,7 +49,9 @@ public class SpawnBlocksManager : MonoBehaviour
     {
         gameManagerSubjectToObserve.PlayClicked += OnPlayClicked;
         gameManagerSubjectToObserve.MenuButtonClicked += OnMenuClicked;
+        playerInput.resetAllBlocksEvent += OnResetAllBlocks;
     }
+
     void Update()
     {
         bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
@@ -119,12 +124,23 @@ public class SpawnBlocksManager : MonoBehaviour
     {
         isGameOn = false;
     }
+    private void OnResetAllBlocks()
+    {
+        GameObject[] iceCubes = GameObject.FindGameObjectsWithTag("IceCube");
+        foreach(GameObject iceCube in iceCubes)
+        {
+            Destroy(iceCube);
+        }
+        BlockCount = 0;
+    }
+
     private void OnDestroy()
     {
         if (gameManagerSubjectToObserve != null)
         {
             gameManagerSubjectToObserve.PlayClicked -= OnPlayClicked;
-            gameManagerSubjectToObserve.PlayClicked -= OnMenuClicked;
+            gameManagerSubjectToObserve.MenuButtonClicked -= OnMenuClicked;
+            playerInput.resetAllBlocksEvent -= OnResetAllBlocks;
         }
     }
 
