@@ -1,3 +1,4 @@
+using DesignPatterns.StatePattern;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _quitButton;
     [SerializeField]
+    private GameObject hintsControls;
+    [SerializeField]
+    private GameObject hintsGame;
+    [SerializeField]
     private float menuAlpha = 100f;
+    [SerializeField]
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput.switchHintsEvent += OnHintsSwitched;
+    }
+
+    private void OnHintsSwitched()
+    {
+        hintsControls.SetActive(!hintsControls.activeSelf);
+        hintsGame.SetActive(!hintsGame.activeSelf);
+    }
 
     public void PlayButtonClick()
     {

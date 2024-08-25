@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace DesignPatterns.StatePattern
@@ -53,6 +52,10 @@ namespace DesignPatterns.StatePattern
 
         [SerializeField]
         private GameObject playerModel;
+
+        private int potionsCounter = 0;
+        [SerializeField]
+        private Transform spawnAfterFall;
 
         private void Awake()
         {
@@ -173,6 +176,17 @@ namespace DesignPatterns.StatePattern
         private void OnSwitchToRight()
         {
             currentAngle += 90;
+        }
+
+        public void PotionCollected()
+        {
+            potionsCounter++;
+            if(potionsCounter == 3)
+            {
+                transform.localScale = Vector3.one * 10f;
+                moveSpeed = 20f;
+                jumpHeight = 5f;
+            }
         }
 
     }

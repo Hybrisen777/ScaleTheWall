@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 269660560950271316}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   jump: 32
   switchToRight: 101
   switchToLeft: 113
+  resetAllBlocks: 114
 --- !u!143 &5801831603422118122
 CharacterController:
   m_ObjectHideFlags: 0
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 7
   acceleration: 10
   jumpHeight: 1.25
   gravity: -15
@@ -175,6 +176,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   currentAngle: 0
   playerModel: {fileID: 6831371490287208938}
+  spawnAfterFall: {fileID: 0}
 --- !u!114 &269660560950271316
 MonoBehaviour:
   m_ObjectHideFlags: 0

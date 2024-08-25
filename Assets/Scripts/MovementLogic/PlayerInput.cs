@@ -13,6 +13,7 @@ namespace DesignPatterns.StatePattern
         public event Action switchToRightEvent;
         public event Action switchToLeftEvent;
         public event Action resetAllBlocksEvent;
+        public event Action switchHintsEvent;
         // Uses old Input class
         [Header("Controls")]
         [SerializeField] private KeyCode forward = KeyCode.W;
@@ -23,6 +24,7 @@ namespace DesignPatterns.StatePattern
         [SerializeField] private KeyCode switchToRight = KeyCode.E;
         [SerializeField] private KeyCode switchToLeft = KeyCode.Q;
         [SerializeField] private KeyCode resetAllBlocks = KeyCode.R;
+        [SerializeField] private KeyCode switchHints = KeyCode.H;
 
         public Vector3 InputVector => inputVector;
         public bool IsJumping { get => isJumping; set => isJumping = value; }
@@ -70,8 +72,12 @@ namespace DesignPatterns.StatePattern
             if (Input.GetKeyDown(resetAllBlocks))
             {
                 resetAllBlocksEvent?.Invoke();
-                Debug.Log("cos");
             }
+            if (Input.GetKeyDown(switchHints))
+            {
+                switchHintsEvent?.Invoke();
+            }
+
 
             inputVector = new Vector3(xInput, yInput, zInput);
 

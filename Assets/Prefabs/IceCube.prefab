@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8806398577784897139}
   m_Layer: 7
   m_Name: IceCube
-  m_TagString: Untagged
+  m_TagString: IceCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
