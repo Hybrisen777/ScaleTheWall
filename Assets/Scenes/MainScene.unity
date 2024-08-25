@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.20810011, g: 0.32247752, b: 0.5090363, a: 1}
+  m_IndirectSpecularColor: {r: 0.2078268, g: 0.32245696, b: 0.511375, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7302,7 +7302,7 @@ GameObject:
   - component: {fileID: 498213360}
   - component: {fileID: 498213359}
   m_Layer: 6
-  m_Name: Cube (1)
+  m_Name: GlassPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8767,7 +8767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7965692260445557407, guid: ec1a7eda78554d046b2811fb85f0e2f5, type: 3}
       propertyPath: m_Name
-      value: Potion (1)
+      value: GreenPotion (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21255,7 +21255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706890920725680285, guid: 64bc6c93a22d6954bafec781c2874882, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21571,7 +21571,7 @@ GameObject:
   - component: {fileID: 998405022}
   - component: {fileID: 998405021}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: GlassPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22602,7 +22602,7 @@ GameObject:
   - component: {fileID: 1057380615}
   - component: {fileID: 1057380614}
   m_Layer: 6
-  m_Name: Cube (2)
+  m_Name: GlassPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34158,7 +34158,7 @@ GameObject:
   - component: {fileID: 1909729434}
   - component: {fileID: 1909729433}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: TeleportBackToRespownPointVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36470,7 +36470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057530240}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
